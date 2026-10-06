@@ -265,8 +265,8 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
 .gloss summary::before{content:"";width:6px;height:6px;border-right:1.5px solid var(--t3);border-bottom:1.5px solid var(--t3);transform:rotate(-45deg);transition:transform .2s;margin-right:2px}
 .gloss[open] summary::before{transform:rotate(45deg)}
 .gloss p{margin:0 0 8px}
-.gloss dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0 0 14px}
-.gloss dt{font-weight:600;color:var(--t1);white-space:nowrap}
+.gloss dl{display:grid;grid-template-columns:minmax(0, 28ch) minmax(0, 1fr);gap:6px 14px;margin:0 0 14px}
+.gloss dt{font-weight:600;color:var(--t1);white-space:normal;overflow-wrap:anywhere}
 .gloss dd{margin:0}
 @media (max-width:960px){.gloss dl{grid-template-columns:1fr;gap:2px} .gloss dd{margin-bottom:8px}}
 .empty{border:1px dashed var(--divider);border-radius:12px;padding:40px 24px;text-align:center;color:var(--t2);margin-top:24px}
@@ -427,7 +427,7 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
     </div>
   </div>
   <div class="group">
-    <label class="toggle"><input type="checkbox" id="f-dispute"> Chỉ xem mục có tranh cãi</label>
+    <label class="toggle"><input type="checkbox" id="f-dispute"> Show disputed entries only</label>
     <label class="toggle"><input type="checkbox" id="f-todo"> Chỉ xem mục cần xác minh</label>
     <button class="reset" id="reset">Xóa bộ lọc</button>
   </div>
@@ -448,7 +448,7 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
       <div class="stat" aria-live="polite">Đang hiển thị <b id="cnt">–</b> mục, tổng <span id="tot">–</span> mục</div>
       <div class="doc-links">Bài dài: <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/docs/gap-nguoi-la-bi-nan-co-nen-dung-lai.md">Gặp người lạ bị nạn có nên dừng lại</a> · <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/docs/danh-muc-do-dung-khan-cap-gia-dinh.md">Danh mục đồ dùng khẩn cấp gia đình</a> · <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/docs/cuoi-co-dang-khong.md">Cưới có đáng không</a> · <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/docs/lam-nen-tang-can-nhung-giay-phep-gi.md">Làm nền tảng cần những giấy phép gì</a> · <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/docs/nhip-dong-ho-sinh-hoc-va-ca-dem.md">Nhịp đồng hồ sinh học và ca đêm</a></div>
       <div class="doc-links">AI: <a href="https://github.com/chuanman2707/HowToLiveBetter/blob/main/skills/life-decision-guide/README.md">Để Claude Code hoặc Codex trả lời câu hỏi của bạn theo cuốn sách này (cách cài skill)</a></div>
-      <details class="gloss" id="gloss"><summary>Chữ viết tắt và thuật ngữ chưa rõ</summary><p>Từ gạch chân chấm trong nội dung, bấm vào hoặc rê chuột lên là có giải thích. Bảng đầy đủ như sau.</p><dl></dl></details>
+      <details class="gloss" id="gloss"><summary>Glossary: Statistical &amp; Legal Terms</summary><p>Từ gạch chân chấm trong nội dung, bấm vào hoặc rê chuột lên là có giải thích. Bảng đầy đủ như sau.</p><dl></dl></details>
     </div>
     <div id="list">
       <div class="status" id="status"><span id="status-t">Đang đọc nội dung …</span><div class="bar"><i id="status-b"></i></div></div>
@@ -1019,7 +1019,7 @@ function build(sections){
       add(e.grade, `Grade ${e.grade}`);
       if (e.lens) add('plain', LENS_LABEL[e.lens] || e.lens);
       for (const d of ['money','time','will']) if (e[d]) add('plain', LABEL[d][e[d]] || e[d]);
-      if (e.dispute) add('danger', 'Tranh cãi');
+      if (e.dispute) add('danger', 'Disputed');
       if (e.todo) add('warn', 'Cần xác minh');
       if (e.tq) { const t = document.createElement('span'); t.className = 'badge warn'; t.textContent = 'TQ';
         t.title = 'Mục gắn luật/chế độ của Trung Quốc, chỉ để tham khảo'; badges.appendChild(t); }

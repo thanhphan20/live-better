@@ -161,7 +161,7 @@ Mỗi mục lời khuyên đều đánh dấu hạng chứng cứ:
 | B | Có nghiên cứu chống lưng, nhưng nói không ra một số xác thực; hay chỉ có cỡ mẫu nhỏ, một nghiên cứu riêng lẻ chống |
 | C | Kinh nghiệm tác giả, hay cách làm mọi người công nhận, không có văn hiến nghiên cứu trực tiếp |
 
-Trong 641 mục: A 424 · B 166 · C 51, có 58 mục đánh dấu tranh cãi, 2 chỗ cần xác minh. Mục cấp A/B có tranh cãi sẽ đánh dấu "Tranh cãi" và liệt chứng cứ phản phương. Mọi nguồn chỉ trích văn hiến sơ cấp (luận văn tạp chí kèm DOI hay liên kết PubMed, hay báo cáo cơ cấu chính thức như WHO/CDC/Tổng cục Thống kê), không trích chuyển thuật thứ cấp. Số không xác định đánh dấu "cần xác minh". Nội dung pháp luật TQ vẫn trích nguyên văn điều khoản và văn hiệu trong cột Nguồn.
+Trong 641 mục: A 424 · B 166 · C 51, có 58 mục đánh dấu tranh cãi, 2 chỗ cần xác minh. Mục cấp A/B có tranh cãi sẽ đánh dấu "Disputed" và liệt chứng cứ phản phương. Mọi nguồn chỉ trích văn hiến sơ cấp (luận văn tạp chí kèm DOI hay liên kết PubMed, hay báo cáo cơ cấu chính thức như WHO/CDC/Tổng cục Thống kê), không trích chuyển thuật thứ cấp. Số không xác định đánh dấu "cần xác minh". Nội dung pháp luật TQ vẫn trích nguyên văn điều khoản và văn hiệu trong cột Nguồn.
 
 ## Các mức hiệu quả chi phí
 
@@ -182,7 +182,7 @@ Trong 641 mục theo hiệu quả chi phí: cực cao 109 (17%), cao 292 (46%), 
 Chính văn cố dùng cách nói ngày thường, nhưng trích nghiên cứu lúc miễn không được mấy danh từ thống kê. Xem không hiểu tra bảng này; trong trang tra cứu trực tuyến, đem con chuột dừng trên từ mang gạch chân đứt (trên điện thoại bấm một cái) cũng sẽ bật lời giải.
 
 <details>
-<summary>Mở 41 mục thuật ngữ (All-cause Mortality, HR, RR, 95% CI, Meta-analysis, BMI, LPR, Deposit vs. Earnest Money……)</summary>
+<summary>Glossary: Statistical &amp; Legal Terms</summary>
 
 | Thuật ngữ (EN) | Từ khóa trong nội dung (VI) | Nghĩa |
 | --- | --- | --- |
