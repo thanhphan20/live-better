@@ -7,7 +7,7 @@
 Nói sống sao cho lâu, sao cho ít bệnh, xảy ngoài ý muốn cứu thế nào. Nói sao cho ít tiêu tiền oan, việc nào để người bị lừa, dính kiện tụng. Nói lúc không việc không tiền đi lĩnh được gì, mở tiệm, mở công ty, làm website phải làm thủ tục gì. Cũng nói yêu đương cưới sinh con, đi nước ngoài và học nghề.<br>
 641 mục lời khuyên, mỗi mục viết rõ tiêu gì, đổi lại gì, chứng cứ cứng cỡ nào, nguồn chỉ trích luận văn tạp chí và văn kiện chính thức.
 
-Đây là bản dịch tiếng Việt của sách gốc tiếng Trung HowToLiveBetter (upstream eternity4719/HowToLiveBetter). Nội dung pháp luật, trợ cấp và thủ tục trong sách chủ yếu là của Trung Quốc; chỗ nào chỉ dùng được cho bối cảnh Trung Quốc đều đánh dấu「Chỉ tham khảo TQ:」.
+Đây là bản dịch tiếng Việt của sách gốc tiếng Trung HowToLiveBetter của eternity4719 (upstream eternity4719/HowToLiveBetter), theo [CC BY 4.0](LICENSE). Nội dung pháp luật, trợ cấp và thủ tục trong sách chủ yếu là của Trung Quốc; chỗ nào chỉ dùng được cho bối cảnh Trung Quốc đều đánh dấu「Chỉ tham khảo TQ:」.
 
 Không cần làm hết: đây là đơn chọn lựa đã sắp theo hiệu quả chi phí, không phải danh sách nhiệm vụ — nhặt đi một hai mục cũng tính, tác giả bản gốc cũng không làm được phần lớn trong đó.
 
@@ -15,7 +15,6 @@ Không cần làm hết: đây là đơn chọn lựa đã sắp theo hiệu qu�
 [![Mục](https://img.shields.io/badge/muc-641%20muc-18794e?style=flat-square)](#mục-lục)
 [![Phân hạng chứng cứ](https://img.shields.io/badge/muc-chung-cu-A%20424%20%C2%B7%20B%20166%20%C2%B7%20C%2051-915930?style=flat-square)](#phân-hạng-chứng-cứ)
 [![Nguồn sơ cấp](https://img.shields.io/badge/nguon-so-cap-1443%20link%20nguon-565a5f?style=flat-square)](docs/ghi-chep-kiem-chung/)
-[![Giấy phép](https://img.shields.io/badge/giay-phep-CC%20BY%204.0-565a5f?style=flat-square)](#giấy-phép)
 
 ### [Mở trang tra cứu trực tuyến](https://chuanman2707.github.io/HowToLiveBetter/) · [Cho AI trả lời theo sách (skill)](skills/life-decision-guide/README.md)
 
@@ -274,17 +273,3 @@ Mục trong mỗi phần theo hiệu quả chi phí từ cao tới thấp sắp.
 ## Nội dung
 
 Chính văn theo phần tách thành 34 file markdown để ở [book/](book/), bấm tên phần trong mục lục trên vào. Tách ra là vì file đơn đã vượt hạn trên GitHub render Markdown 512 KB, phần phía sau hiển thị không ra; [trang tra cứu trực tuyến](https://chuanman2707.github.io/HowToLiveBetter/) sẽ đem mấy file này hợp lại đọc, cách dùng không đổi.
-
-## Giấy phép
-
-Chính văn phát theo [CC BY 4.0](LICENSE), phạm vi là văn tự book/, docs/ và README này. Bạn có thể chuyển tải, cải biên, thương dụng, không cần hỏi tác giả, nhưng phải làm đủ ba việc:
-
-- Viết rõ xuất xứ: "Cẩm nang sống đáng giá" (bản tiếng Việt), kèm liên kết kho https://github.com/chuanman2707/HowToLiveBetter .
-- Kèm liên kết giấy phép https://creativecommons.org/licenses/by/4.0/ .
-- Nội dung đã đổi phải viết rõ đã đổi. Điều pháp, chuẩn trợ cấp và ngày đến hạn trong sách thường cập nhật, khuyến nghị đồng thời viết rõ bạn đồng bộ là bản ngày nào.
-
-Code dùng [MIT](LICENSE-CODE), phạm vi là tools/, skills/, index.html và .github/.
-
-## Lịch sử Star
-
-[![Star History Chart](https://api.star-history.com/svg?repos=chuanman2707/HowToLiveBetter&type=Date)](https://star-history.com/#chuanman2707/HowToLiveBetter&Date)
