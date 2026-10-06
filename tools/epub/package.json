@@ -1,0 +1,12 @@
+{
+  "name": "howtolivebetter-epub",
+  "private": true,
+  "type": "module",
+  "description": "Đóng gói README + book/*.md + docs/*.md thành EPUB",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "marked": "18.0.13"
+  }
+}

@@ -1,0 +1,27 @@
+name: "Sửa lỗi: mục viết sai hoặc quá hạn"
+description: Số không đúng, pháp quy đã đổi, nguồn mở không ra, cách nói có sai
+title: "Phần X mục Y:"
+labels: ["sua-loi"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Mục nào
+      description: Viết số phần và số mục, ví dụ "phần 32, mục 2".
+      placeholder: Phần X mục Y
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Sai ở đâu
+      description: Chép nguyên câu gốc sang, rồi nói đáng lẽ phải là gì.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Căn cứ
+      description: Luận văn tạp chí (DOI hay link PubMed), nguyên văn điều luật, trang web chính phủ hay cơ cấu chính thức. Chuyển thuật kiểu trả lời mạng, bài công chúng không dùng được.
+    validations:
+      required: true

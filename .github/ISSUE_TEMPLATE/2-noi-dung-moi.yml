@@ -1,0 +1,28 @@
+name: Đề nghị bổ sung nội dung
+description: Chủ đề sách chưa viết tới, bạn thấy đáng thêm
+labels: ["noi-dung-moi"]
+body:
+  - type: markdown
+    attributes:
+      value: Sách này chỉ thu lời khuyên trả lời được "tiêu gì, đổi về gì", nguồn chỉ trích luận văn tạp chí và văn kiện chính thức. Bản dịch xin duy trì ở fork của bạn, không gộp vào kho này, đầu README có thể thêm link.
+  - type: input
+    id: topic
+    attributes:
+      label: Chủ đề
+      placeholder: "Ví dụ: chức xưng đánh giá thế nào"
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Muốn sách trả lời câu hỏi gì
+      description: Viết cụ thể chút, ví dụ "nên đi cơ cấu nào, phải chuẩn bị tài liệu gì".
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Nguồn bạn biết (không bắt buộc)
+      description: Link luận văn, pháp quy, văn kiện chính thức.
+    validations:
+      required: false

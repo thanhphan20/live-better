@@ -1,0 +1,154 @@
+# Chính văn vừa đổi liền sinh lại ba thứ, treo lên Release cố định "epub-latest", link tải không đổi:
+#   EPUB          https://github.com/chuanman2707/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub
+#   PDF           https://github.com/chuanman2707/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf
+#   File đơn offline  https://github.com/chuanman2707/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html
+# PR chỉ sinh và nghiệm, không phát, sản vật ở artifact của trang Actions.
+name: Sách điện tử
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - README.md
+      - index.html
+      - og.png
+      - book/**
+      - docs/*.md
+      - tools/**
+      - .github/workflows/book.yml
+  pull_request:
+    paths:
+      - README.md
+      - index.html
+      - og.png
+      - book/**
+      - docs/*.md
+      - tools/**
+      - .github/workflows/book.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: book-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PANDOC_VERSION: '3.11'
+  TYPST_VERSION: '0.15.1'
+
+jobs:
+  # Kiểm tra trích dẫn chéo. Job riêng một cái, không treo vào build: anchor chưa
+  # bổ xong không nên liên lụy việc phát EPUB, PDF và file đơn offline, đó là hai
+  # chuyện. Trên PR vẫn đỏ, trên main cái nên phát vẫn phát ra.
+  # Chuỗi bản địa (sync-stats.mjs) phải nhớ chạy mới chạy,
+  # PR bên ngoài lại càng chạy không tới, nên đạo kiểm tra này phải có một phần ở CI.
+  # Không phụ thuộc, mấy giây.
+  refs:
+    name: Kiểm tra trích dẫn chéo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/check-refs.mjs --check
+
+  # Kiểm tra Nói dễ hiểu: độ dài, hành nghề nghiên cứu, cách nói trừu tượng. Lý do
+  # giống trên, job riêng một cái, không chặn phát hành.
+  plain:
+    name: Kiểm tra "Nói dễ hiểu"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/check-plain.mjs
+
+  # Kiểm tra số liệu: số mục, số A/B/C, số link trong README, index.html, og.html
+  # có khớp book/ không. sync-stats.mjs bản địa phải nhớ chạy mới cập nhật, PR
+  # gộp trực tiếp trên web hoàn toàn qua không được nó. Lý do giống trên, không chặn phát.
+  # Chỉ kiểm không sửa: để CI đẩy commit vào main sẽ phân nhánh với bản địa,
+  # và Ubuntu không có font đủ dấu tiếng Việt để chụp og.png cho đúng.
+  stats:
+    name: Kiểm tra số liệu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/sync-stats.mjs --check
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tools/epub/package-lock.json
+
+      - run: npm ci
+        working-directory: tools/epub
+
+      - name: EPUB
+        run: node tools/epub/build.mjs
+
+      - name: File đơn HTML offline
+        run: node tools/offline/build.mjs
+
+      - name: Cài pandoc, typst và font
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto
+          curl -sSL "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-amd64.tar.gz" | tar xz
+          curl -sSL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" | tar xJ
+          echo "$PWD/pandoc-${PANDOC_VERSION}/bin" >> "$GITHUB_PATH"
+          echo "$PWD/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+
+      - name: PDF
+        run: |
+          typst fonts | grep -i -E 'noto (serif|sans)' || echo 'Không thấy Noto, PDF sẽ lùi sang font khác, kiểm tra bước fonts-noto'
+          node tools/pdf/build.mjs
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: epubcheck
+        run: |
+          curl -sSL -o epubcheck.zip https://github.com/w3c/epubcheck/releases/download/v5.4.0/epubcheck-5.4.0.zip
+          unzip -q epubcheck.zip
+          java -jar epubcheck-5.4.0/epubcheck.jar dist/HowToLiveBetter.epub
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HowToLiveBetter
+          path: |
+            dist/HowToLiveBetter.epub
+            dist/HowToLiveBetter.pdf
+            dist/HowToLiveBetter.html
+
+      - name: Phát hành tới Release epub-latest
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -f epub-latest
+          git push -f origin epub-latest
+          notes="Chính văn commit ${GITHUB_SHA::7}, sinh lúc $(date -u -d '+7 hours' +'%Y-%m-%d %H:%M') (giờ Việt Nam). Ba thứ EPUB, PDF, file đơn HTML offline, sau mỗi lần chính văn cập nhật tự động sinh lại, link tải cố định không đổi."
+          if gh release view epub-latest >/dev/null 2>&1; then
+            gh release edit epub-latest --title "Sách điện tử (EPUB / PDF / HTML offline, tự cập nhật)" --notes "$notes"
+          else
+            gh release create epub-latest --title "Sách điện tử (EPUB / PDF / HTML offline, tự cập nhật)" --notes "$notes" --latest=false
+          fi
+          gh release upload epub-latest \
+            dist/HowToLiveBetter.epub \
+            dist/HowToLiveBetter.pdf \
+            dist/HowToLiveBetter.html --clobber
