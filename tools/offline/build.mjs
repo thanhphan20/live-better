@@ -4,7 +4,7 @@
 // Nội dung nhúng vào window.__CORPUS__, init() của index.html thấy biến này
 // là không fetch nữa; link tương đối trong site đổi thành địa chỉ online, các
 // phần còn lại giữ nguyên từng chữ.
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { ROOT, REPO, SITE, read, gitCommit, buildStamp } from '../lib/book.mjs';
 
@@ -62,6 +62,17 @@ html = html.replace(foot, `${foot}Bản offline, tạo lúc ${STAMP} (giờ Vi�
 const mainScript = '\n<script>\n/* ---------- Bảng debug';
 must(mainScript, 'điểm đầu của script chính');
 html = html.replace(mainScript, `\n<script>window.__CORPUS__=${corpusJson}</script>${mainScript}`);
+
+// Font tự chứa: đọc WOFF2 trong assets/fonts/ rồi đổi URL tương ứng thành
+// data URL, bản offline double click mở không cần mạng và không hỏi host font nào
+const FONTS = ['assets/fonts/SourceSans3-VF.woff2', 'assets/fonts/SourceSerif4-VF.woff2'];
+for (const f of FONTS) {
+  const url = `url("${f}")`;
+  if (!html.includes(url)) throw new Error(`không tìm thấy tham chiếu ${url} trong index.html, script bản offline phải sửa theo`);
+  const p = resolve(ROOT, f);
+  if (!existsSync(p)) throw new Error(`thiếu file font ${f}, phải có trong assets/fonts/ trước khi build bản offline`);
+  html = html.replaceAll(url, `url("data:font/woff2;base64,${readFileSync(p).toString('base64')}")`);
+}
 
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, html);

@@ -32,10 +32,10 @@
 ]}
 </script>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Font tự lưu trong assets/fonts/ (SIL OFL): trang không hỏi Google Fonts hay host font nào lúc chạy */
+@font-face{font-family:"Source Sans 3";src:url("assets/fonts/SourceSans3-VF.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("assets/fonts/SourceSerif4-VF.woff2") format("woff2");font-weight:200 900;font-style:normal;font-display:swap}
 :root{
   --bg:#ffffff; --bg-alt:#f6f6f7; --bg-soft:#f6f6f7; --bg-mute:#f1f1f2; --bg-elv:#ffffff;
   --divider:#e2e2e3; --gutter:#e2e2e3;
@@ -47,7 +47,8 @@
   --gray-1:#565a5f; --gray-soft:rgba(142,150,170,.14);
   --mark:rgba(234,179,8,.32);
   --shadow:0 1px 2px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.06);
-  --font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --font:"Source Sans 3",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --font-serif:"Source Serif 4",ui-serif,Georgia,"Times New Roman",serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --nav-h:64px; --side-w:272px;
   color-scheme:light;
@@ -168,13 +169,13 @@ html.dark .switch .sun{display:none} html.dark .switch .moon{display:block}
 .content{padding:calc(var(--nav-h) + 40px) 48px 128px calc(var(--side-w) + 48px)}
 .doc{max-width:900px;margin:0 auto}
 .doc-head{margin-bottom:28px}
-.doc-head h1{font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+.doc-head h1{font-family:var(--font-serif);font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
 .doc-head p{margin:0;color:var(--t2);font-size:16px}
 .doc-head .stat{color:var(--t3);font-size:14px;margin-top:6px}
 .doc-head .stat b{color:var(--brand-1);font-weight:600}
 .sec-block{margin-top:40px}
 .sec-h{display:flex;align-items:baseline;gap:12px;padding-top:24px;border-top:1px solid var(--divider);margin-bottom:8px}
-.sec-h h2{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.02em;margin:0}
+.sec-h h2{font-family:var(--font-serif);font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.02em;margin:0}
 .sec-h .shown{margin-left:auto;font-size:13px;color:var(--t3);font-variant-numeric:tabular-nums}
 .intro{margin:0 0 12px;color:var(--t2);font-size:14px;max-width:72ch}
 .intro:last-of-type{margin-bottom:20px}
